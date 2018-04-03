@@ -1,0 +1,17 @@
+@import "../../palette";
+
+.TestComponent__wrapper {
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 390px;
+    align-content: center;
+    text-align: center;
+
+    .TestComponent__timer{
+        cursor: pointer;
+    }
+}
