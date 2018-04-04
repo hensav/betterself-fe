@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { startExercise, decrement, endTimer } from "./exerciseActions"
+import { startExercise, decrement, endTimer, changeExercise, changeTime } from "./exerciseActions"
 import _Exercise from "./Exercise"
 
 class Exercise extends Component {
@@ -20,8 +20,11 @@ const mapStateToProps = (state, ownProps) => {
     data: state.exercise.data,
     loading: state.exercise.loading,
     time: state.exercise.time,
-    timerText: state.exercise.timerText
+    timerText: state.exercise.timerText,
+    error: state.exercise.error,
+    activeExercise: state.exercise.activeExercise,
+    activeTime: state.exercise.activeTime
   })
 }
 
-export default connect(mapStateToProps, { startExercise, decrement, endTimer })(Exercise)
+export default connect(mapStateToProps, { startExercise, decrement, endTimer, changeExercise, changeTime })(Exercise)
