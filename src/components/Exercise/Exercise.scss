@@ -18,4 +18,23 @@
         cursor: pointer;
         padding: 20px;
     }
+    .TestComponent__timer-ripple{
+        animation: effect_dylan 0.6s ease-out;
+        animation-fill-mode: forwards;
+
+    }
+    @keyframes effect_dylan {
+        50% {
+            transform: scale(1.5, 1.5);
+            opacity: 0;
+        }
+        99% {
+            transform: scale(0.001, 0.001);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(0.001, 0.001);
+            opacity: 1;
+        }
+    }
 }
