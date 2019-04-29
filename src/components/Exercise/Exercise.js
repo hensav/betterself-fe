@@ -1,7 +1,11 @@
 import React from "react"
 import RoundButton from '../Buttons/RoundButon'
+import WideButton from '../Buttons/WideButton'
+
 import beep1 from '../../media/beep1.wav'
 import beep2 from '../../media/beep2.wav'
+
+import { Link } from "react-router-dom"
 
 const ProgressBar = require('react-progressbar.js')
 const Circle = ProgressBar.Circle;
@@ -32,12 +36,8 @@ class Exercise extends React.Component {
     if(sound === "beep2") this.beep2.play()
   }
 
-  ripple(){
-
-  }
   render () {
     const {
-      data,
       loading,
       time,
       timerText,
@@ -50,15 +50,13 @@ class Exercise extends React.Component {
       prepTimer,
       changeExercise,
       changeTime,
-      ripple
+      initialTime
     } = this.props
-
     soundPlaying ? this.playSound(sound) : null
-    console.log(ripple, "ripple")
-
+      if(initialTime !== 0) console.log(toPercent(initialTime, time))
     return (
-      <div className={"TestComponent__wrapper"}>
-        <div>
+      <div className={"Exercise-wrapper"}>
+        <div className={"Exercise__upper-buttons"}>
           {
             exercises.map(x=>
               <RoundButton
@@ -70,13 +68,13 @@ class Exercise extends React.Component {
               />)
           }
         </div>
-        <div className={"Timer__wrapper"}>
+        <div className={"Timer"}>
           <div
-            className={"TestComponent__timer"}
-            onClick={() => !started  && prepTimer(activeExercise, activeTime)}
+            className={"Timer__circle"}
+            onClick={() => !started ?  prepTimer(activeExercise, activeTime) : null}
           >
             <Circle
-              progress={toPercent(data.time, time)}
+              progress={started ? toPercent(initialTime, time) : 0.00}
               text={error ? "No connection" : toSeconds(timerText)}
               options={{
                 strokeWidth: 0.6,
@@ -96,15 +94,15 @@ class Exercise extends React.Component {
                       value: 'translate(-50%, -50%)'
                     }
                   }
-                }
+                },
               }}
               initialAnimate={true}
               containerClassName={'.progressbar'}
-              className={"TestComponent__timer"}
+              className={"Timer__circle"}
             />
           </div>
         </div>
-        <div>
+        <div className={"Exercise__lower-buttons"}>
           {
             buttons.map(x=>
               <RoundButton
@@ -115,6 +113,11 @@ class Exercise extends React.Component {
                 disabled={started}
               />)
           }
+        </div>
+        <div className={"Exercise__footer"}>
+          <Link to="/stats">
+            <WideButton text={"Stats"}/>
+          </Link>
         </div>
       </div>
     )

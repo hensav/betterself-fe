@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "dev": "webpack-dev-server --hot"
+    "dev": "webpack-dev-server --hot --inline"
   },
   "keywords": [],
   "author": "",
@@ -19,9 +18,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
-    "node-sass": "^4.5.3",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "node-sass": "^4.11.0",
     "react-redux": "^5.0.5",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
@@ -36,9 +33,10 @@
     "babel-preset-react": "^6.24.1",
     "extract-text-webpack-plugin": "^2.1.2",
     "html-webpack-plugin": "^2.29.0",
-    "react": "^15.6.2",
-    "react-dom": "^15.6.2",
-    "react-progressbar.js": "^0.2.0",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-progressbar.js": "git+https://github.com/kimmobrunfeldt/react-progressbar.js.git",
+    "react-router-dom": "^4.3.1",
     "react-sound": "^1.1.0",
     "webpack": "^2.6.1"
   }

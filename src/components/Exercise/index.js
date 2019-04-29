@@ -1,22 +1,16 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import { startExercise, decrement, endTimer, changeExercise, changeTime, prepTimer } from "./exerciseActions"
-import _Exercise from "./Exercise"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { startExercise, decrement, endTimer, changeExercise, changeTime, prepTimer, cancel } from './exerciseActions'
+import _Exercise from './Exercise'
 
 class Exercise extends Component {
-  constructor(props) {
-    super(props)
-  }
-  componentDidMount(){
-  }
-
-  render() {
+  render () {
     return <_Exercise {...this.props}/>
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return({
+  return ({
     data: state.exercise.data,
     loading: state.exercise.loading,
     time: state.exercise.time,
@@ -28,8 +22,9 @@ const mapStateToProps = (state, ownProps) => {
     prepTime: state.exercise.prepTime,
     sound: state.exercise.sound,
     soundPlaying: state.exercise.soundPlaying,
-    ripple: state.exercise.ripple
+    ripple: state.exercise.ripple,
+    initialTime: state.exercise.initialTime
   })
 }
 
-export default connect(mapStateToProps, { startExercise, decrement, endTimer, changeExercise, changeTime, prepTimer })(Exercise)
+export default connect(mapStateToProps, { startExercise, decrement, endTimer, changeExercise, changeTime, prepTimer, cancel })(Exercise)

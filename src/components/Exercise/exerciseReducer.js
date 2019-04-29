@@ -10,14 +10,13 @@ import {
   PREP_TIME_STARTED,
   DECREMENT_PREP_TIME,
   EXERCISE_ENDED,
-  ADD_RIPPLE,
-  REMOVE_RIPPLE
+  CANCEL
 } from './exerciseActions'
 
 export default function (state = {
   loading: false,
   started: false,
-  data: "",
+  data: '',
   time: 0,
   timerText: 'Plank',
   error: false,
@@ -25,10 +24,11 @@ export default function (state = {
   activeTime: 10000,
   prepTime: 5000,
   soundPlaying: false,
-  sound: "beep1",
-  ripple: false
+  sound: 'beep1',
+  ripple: false,
+  initialTime: 0
 }, action) {
-  switch(action.type) {
+  switch (action.type) {
     case DECREMENT_TIME : {
       return {
         ...state,
@@ -43,13 +43,14 @@ export default function (state = {
         started: false,
         prepTime: 5000,
         soundPlaying: true,
-        sound: "beep2"
+        sound: 'beep2'
       }
     }
     case EXERCISE_ENDED : {
       return {
         ...state,
         soundPlaying: false,
+        initialTime: 0
       }
     }
     case START_EXERCISE : {
@@ -61,12 +62,14 @@ export default function (state = {
       }
     }
     case EXERCISE_STARTED : {
+      console.log(action.payload, "EXERCISE_STARTED")
       return {
         ...state,
         started: true,
         data: action.payload,
         loading: false,
-        time: action.payload.time,
+        time: action.payload,
+        initialTime: action.payload
       }
     }
     case PREP_TIME_STARTED : {
@@ -81,7 +84,7 @@ export default function (state = {
         prepTime: state.prepTime - 1000,
         timerText: state.prepTime - 1000,
         soundPlaying: true,
-        sound: "beep1"
+        sound: 'beep1'
       }
     }
     case PREP_TIME_ENDED : {
@@ -97,13 +100,15 @@ export default function (state = {
         ...state,
         data: action.payload,
         loading: false,
-        error: true
+        error: true,
+        started: false
       }
     }
     case CHANGE_EXERCISE : {
       return {
         ...state,
         activeExercise: action.payload,
+        timerText: action.payload,
         prepTime: 5000
 
       }
@@ -114,6 +119,16 @@ export default function (state = {
         activeTime: action.payload,
         prepTime: 5000
 
+      }
+    }
+    case CANCEL : {
+      return {
+        ...state,
+        started: false,
+        data: '',
+        time: 0,
+        prepTime: 5000,
+        soundPlaying: false,
       }
     }
     default : {
